@@ -6,9 +6,9 @@ pipeline {
         VPS_PUBLIC_IP = '72.61.236.52'
         FRONTEND_PORT = '3080'
         FRONTEND_URL = "http://${env.VPS_PUBLIC_IP}:3080"
-        BACKEND_PORT = '6000'
-        VITE_API_URL = "http://${env.VPS_PUBLIC_IP}:6000/api/v1"
-        APP_BASE_URL = "http://${env.VPS_PUBLIC_IP}:6000"
+        BACKEND_PORT = '5002'
+        VITE_API_URL = "http://${env.VPS_PUBLIC_IP}:5002/api/v1"
+        APP_BASE_URL = "http://${env.VPS_PUBLIC_IP}:5002"
         DB_PORT = '35432'
         DB_NAME = 'crm_db'
         DB_USER = 'postgres'
