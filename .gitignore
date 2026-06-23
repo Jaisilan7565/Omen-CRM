@@ -1,0 +1,40 @@
+# Node modules
+node_modules/
+jspm_packages/
+
+# Production builds
+dist/
+build/
+out/
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment files
+.env
+.env.production
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Database config / local db files
+local.db
+*.sqlite
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

@@ -1,0 +1,75 @@
+/* 1️⃣  Google Fonts — MUST be first before any other @import */
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&display=swap");
+
+/* 2️⃣  Tailwind CSS v4 */
+@import "tailwindcss";
+
+/* 3️⃣  Design tokens — LIGHT THEME */
+@theme {
+  /* Brand colours */
+  --color-brand-500: #3b5bdb;
+  --color-brand-600: #3451c7;
+  --color-brand-400: #748ffc;
+  --color-violet-500: #845ef7;
+  --color-violet-400: #9775fa;
+
+  /* Neutrals (light UI) */
+  --color-surface-50:  #f8fafc;
+  --color-surface-100: #f1f5f9;
+  --color-surface-200: #e2e8f0;
+  --color-surface-300: #cbd5e1;
+
+  /* Status */
+  --color-success: #0ca678;
+  --color-danger:  #e03131;
+  --color-warning: #f76707;
+
+  /* Typography */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* 4️⃣  Base resets */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #f1f5f9;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ── Text selection ─────────────────────────────────────────────────── */
+::selection { background: rgba(59,91,219,0.2); color: #1e293b; }
+
+/* ── Focus ring ─────────────────────────────────────────────────────── */
+:focus-visible { outline: 2px solid #3b5bdb; outline-offset: 2px; }
+
+/* ── Spinner ────────────────────────────────────────────────────────── */
+.spinner { animation: spin 0.85s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Background blob animation ──────────────────────────────────────── */
+.blob-animate { animation: blobFloat 8s ease-in-out infinite alternate; }
+@keyframes blobFloat {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(30px, 20px) scale(1.08); }
+}
+
