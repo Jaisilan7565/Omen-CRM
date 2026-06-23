@@ -204,7 +204,7 @@ export default function DashboardPage() {
         className="flex gap-2.5 flex-wrap"
       >
         {[
-          "✓ Backend connected at localhost:5000",
+          "✓ Backend connection active",
           `✓ JWT authenticated as ${user?.email || "anonymous"}`,
           `✓ Role: ${user?.roles?.[0]?.name ?? "Platform Admin"}`,
         ].map((badge) => (

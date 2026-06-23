@@ -3,9 +3,9 @@ pipeline {
 
     environment {
         // Define default settings, which can be overridden in Jenkins pipeline configuration
-        // IMPORTANT: In production, configure VPS_PUBLIC_IP in Jenkins to your VPS external IP or domain.
-        VPS_PUBLIC_IP = 'localhost' 
-        VITE_API_URL = "http://${env.VPS_PUBLIC_IP}:6000/api/v1"
+        // By default, Nginx proxies requests under /api to the backend container,
+        // making the build completely environment-agnostic.
+        VITE_API_URL = '/api/v1'
         DB_NAME = 'crm_db'
         DB_USER = 'postgres'
         DB_PASSWORD = 'jayking46'
@@ -58,7 +58,7 @@ pipeline {
 
     post {
         success {
-            echo "Zoho CRM successfully deployed on http://${env.VPS_PUBLIC_IP}:3080"
+            echo "Zoho CRM successfully deployed on VPS port 3080!"
         }
         failure {
             echo "Deployment failed! Check the Jenkins console log."
