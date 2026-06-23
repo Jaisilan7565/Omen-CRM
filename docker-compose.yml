@@ -8,8 +8,7 @@ services:
       POSTGRES_USER: ${DB_USER:-postgres}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-jayking46}
     ports:
-      # Map to 35432 to avoid collision with existing 5432, 25432, and 15432 ports on VPS
-      - "35432:5432"
+      - "${DB_PORT:-35432}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -25,8 +24,7 @@ services:
     container_name: zoho_crm_backend
     restart: always
     ports:
-      # Map to 6000 to avoid collision with 5000, 5001, and 4000 ports on VPS
-      - "6000:5000"
+      - "${BACKEND_PORT:-6000}:5000"
     environment:
       NODE_ENV: production
       PORT: 5000
@@ -50,13 +48,12 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        # Default to relative path so it uses the Nginx reverse proxy out of the box
-        VITE_API_URL: ${VITE_API_URL:-/api/v1}
+        # Falls back to the root .env VITE_API_URL or defaults to localhost:6000
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:6000/api/v1}
     container_name: zoho_crm_frontend
     restart: always
     ports:
-      # Map to 3080 to avoid collision with 3000 and 9080 ports on VPS
-      - "3080:80"
+      - "${FRONTEND_PORT:-3080}:80"
     depends_on:
       - backend
 

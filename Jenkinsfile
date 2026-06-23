@@ -2,10 +2,14 @@ pipeline {
     agent any
 
     environment {
-        // Define default settings, which can be overridden in Jenkins pipeline configuration
-        // By default, Nginx proxies requests under /api to the backend container,
-        // making the build completely environment-agnostic.
-        VITE_API_URL = '/api/v1'
+        // Default deployment configuration targeting your VPS
+        VPS_PUBLIC_IP = '72.61.236.52'
+        FRONTEND_PORT = '3080'
+        FRONTEND_URL = "http://${env.VPS_PUBLIC_IP}:3080"
+        BACKEND_PORT = '6000'
+        VITE_API_URL = "http://${env.VPS_PUBLIC_IP}:6000/api/v1"
+        APP_BASE_URL = "http://${env.VPS_PUBLIC_IP}:6000"
+        DB_PORT = '35432'
         DB_NAME = 'crm_db'
         DB_USER = 'postgres'
         DB_PASSWORD = 'jayking46'
@@ -22,15 +26,21 @@ pipeline {
         stage('Build & Deploy') {
             steps {
                 echo "Deploying Zoho CRM 2 to VPS..."
-                echo "VITE_API_URL set to: ${env.VITE_API_URL}"
+                echo "Creating production .env file dynamically..."
                 
-                // Spin up database, backend, and frontend containers using docker compose
+                // Write environment variables into the .env file in the workspace
                 sh """
-                    export VITE_API_URL="${env.VITE_API_URL}"
-                    export DB_NAME="${env.DB_NAME}"
-                    export DB_USER="${env.DB_USER}"
-                    export DB_PASSWORD="${env.DB_PASSWORD}"
-                    export JWT_SECRET="${env.JWT_SECRET}"
+                    echo "VPS_PUBLIC_IP=${env.VPS_PUBLIC_IP}" > .env
+                    echo "FRONTEND_PORT=${env.FRONTEND_PORT}" >> .env
+                    echo "FRONTEND_URL=${env.FRONTEND_URL}" >> .env
+                    echo "BACKEND_PORT=${env.BACKEND_PORT}" >> .env
+                    echo "VITE_API_URL=${env.VITE_API_URL}" >> .env
+                    echo "APP_BASE_URL=${env.APP_BASE_URL}" >> .env
+                    echo "DB_PORT=${env.DB_PORT}" >> .env
+                    echo "DB_NAME=${env.DB_NAME}" >> .env
+                    echo "DB_USER=${env.DB_USER}" >> .env
+                    echo "DB_PASSWORD=${env.DB_PASSWORD}" >> .env
+                    echo "JWT_SECRET=${env.JWT_SECRET}" >> .env
                     
                     docker compose down --remove-orphans
                     docker compose up -d --build
