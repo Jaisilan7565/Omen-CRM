@@ -7,7 +7,7 @@ pipeline {
         FRONTEND_PORT = '3080'
         FRONTEND_URL = "http://${env.VPS_PUBLIC_IP}:3080"
         BACKEND_PORT = '5002'
-        VITE_API_URL = "http://${env.VPS_PUBLIC_IP}:5002/api/v1"
+        VITE_API_URL = "/api/v1"
         APP_BASE_URL = "http://${env.VPS_PUBLIC_IP}:5002"
         DB_PORT = '35432'
         DB_NAME = 'crm_db'
